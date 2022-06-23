@@ -13,17 +13,15 @@ server.on('connection', function(socket) {
 
     // When you receive a message, send that message to every socket.
     socket.on('message', function(msg : ArrayBuffer) {
-        // sockets.forEach(s => s.send('test'));
         const command = Buffer.from(msg).toString();
+        sockets.forEach(s => s.send(command + '\0'));
+        console.log('command', command);
 
         if (command.match(/^mouse_/)) {
             navigation(command, sockets);
         }
         else if (command.match(/^draw_/)) {
             drawing(command);
-        }
-        else {
-            console.log('command', command);
         }
     });
 

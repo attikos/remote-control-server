@@ -5,8 +5,6 @@ export const navigation = (command: string, sockets: WebSocket.WebSocket[]) => {
     const {x, y} = robot.getMousePos();
     const [action, value]: string[] = command.split(' ');
 
-    // console.log('command', command);
-
     let newX: number = x;
     let newY: number = y;
 

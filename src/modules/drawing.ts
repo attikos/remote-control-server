@@ -4,11 +4,6 @@ export const drawing = (command: string) => {
     const {x, y} = robot.getMousePos();
     const [action, radius, length]: string[] = command.split(' ');
 
-    console.log('command', command);
-    console.log('radius', radius);
-    console.log('length', length);
-
-
     if (action === 'draw_circle') {
         let newX = x + (+radius * Math.cos(0));
         let newY = y + (+radius * Math.sin(0));
@@ -16,7 +11,7 @@ export const drawing = (command: string) => {
 
         robot.mouseToggle('down');
 
-        for (let i = 0; i <= Math.PI * 2; i += 0.1) {
+        for (let i = 0; i <= Math.PI * 2; i += 0.05) {
             newX = x + (+radius * Math.cos(i));
             newY = y + (+radius * Math.sin(i));
             robot.dragMouse(newX, newY);
