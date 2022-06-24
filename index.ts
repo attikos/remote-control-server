@@ -25,16 +25,20 @@ server.on('connection', function(socket) {
         const command = Buffer.from(msg).toString();
         sockets.forEach(s => s.send(command + '\0'));
 
-        if (command.match(/^mouse_/)) {
-            navigation(command, sockets);
-            console.log('command', command);
-        }
-        else if (command.match(/^draw_/)) {
-            await drawing(command);
-            console.log('command', command);
-        }
-        else if (command.match(/^prnt_scrn$/)) {
-            printScreen(sockets);
+        try {
+            if (command.match(/^mouse_/)) {
+                navigation(command, sockets);
+                console.log('command', command);
+            }
+            else if (command.match(/^draw_/)) {
+                await drawing(command);
+                console.log('command', command);
+            }
+            else if (command.match(/^prnt_scrn$/)) {
+                printScreen(sockets);
+            }
+        } catch (error) {
+            console.log(error);
         }
     });
 

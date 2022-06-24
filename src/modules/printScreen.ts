@@ -24,13 +24,15 @@ const screenCapture = (x = 0, y = 0, w: number, h: number): Promise<Jimp> => {
     })
 }
 
-export const printScreen = async (sockets: WebSocket[]) => {
+export const printScreen = (sockets: WebSocket[]) => {
     const mousePos = robot.getMousePos();
     var size = 200;
 
-    await new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
-            const image = await screenCapture(mousePos.x - size/2, mousePos.y - size/2, size, size)
+            const cX = (mousePos.x - size/2) < 0 ? 0 : mousePos.x - size/2;
+            const cY = (mousePos.y - size/2) < 0 ? 0 : mousePos.y - size/2;
+            const image = await screenCapture(cX, cY, size, size)
 
             const base64 = await image.getBase64Async(Jimp.MIME_PNG);
             const header = /^data:image\/png;base64,/;
