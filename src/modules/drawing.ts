@@ -75,16 +75,16 @@ export const drawing = (command: string) => {
             robot.mouseToggle('down');
 
             newY += +width;
-            robot.moveMouseSmooth(newX, newY, 10);
+            await robot.moveMouseSmooth(newX, newY);
 
             newX -= +width;
-            robot.moveMouseSmooth(newX, newY, 10);
+            await robot.moveMouseSmooth(newX, newY);
 
             newY -= +width;
-            robot.moveMouseSmooth(newX, newY, 10);
+            await robot.moveMouseSmooth(newX, newY);
 
             newX += +width;
-            robot.moveMouseSmooth(newX, newY, 10);
+            await robot.moveMouseSmooth(newX, newY);
 
             robot.mouseToggle('up');
             robot.moveMouse(x, y);
