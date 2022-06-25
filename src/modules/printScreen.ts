@@ -24,7 +24,7 @@ const screenCapture = (x = 0, y = 0, w: number, h: number): Promise<Jimp> => {
     })
 }
 
-export const printScreen = (sockets: WebSocket[]) => {
+export const printScreen = (sockets: WebSocket[]): Promise<string>  => {
     const mousePos = robot.getMousePos();
     var size = 200;
 
@@ -39,7 +39,7 @@ export const printScreen = (sockets: WebSocket[]) => {
 
             sockets.forEach(s => s.send(`prnt_scrn ${base64.replace(header, '')}\0`));
 
-            resolve(true);
+            resolve('prnt_scrn success!');
 
         } catch (e) {
             console.error(e);

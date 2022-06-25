@@ -24,18 +24,20 @@ server.on('connection', function(socket) {
     socket.on('message', async function(msg : ArrayBuffer) {
         const command = Buffer.from(msg).toString();
         sockets.forEach(s => s.send(command + '\0'));
+        console.log(command);
 
         try {
             if (command.match(/^mouse_/)) {
-                navigation(command, sockets);
-                console.log('command', command);
+                const mgs = await navigation(command, sockets);
+                console.log(mgs);
             }
             else if (command.match(/^draw_/)) {
-                await drawing(command);
-                console.log('command', command);
+                const mgs = await drawing(command);
+                console.log(mgs);
             }
             else if (command.match(/^prnt_scrn$/)) {
-                printScreen(sockets);
+                const mgs = await printScreen(sockets);
+                console.log(mgs);
             }
         } catch (error) {
             console.log(error);
@@ -44,7 +46,7 @@ server.on('connection', function(socket) {
 
     // When a socket closes, or disconnects, remove it from the array.
     socket.on('close', function() {
-        // sockets = sockets.filter(s => s !== socket);
+        sockets = sockets.filter(s => s !== socket);
         console.log('close');
     });
 });

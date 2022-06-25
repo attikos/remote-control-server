@@ -35,7 +35,7 @@ export const drawing = (command: string) => {
             robot.mouseToggle('up');
             robot.moveMouse(x, y);
 
-            resolve(true);
+            resolve('draw_circle success!');
         }
 
         if (action === 'draw_rectangle') {
@@ -62,7 +62,7 @@ export const drawing = (command: string) => {
 
             robot.mouseToggle('up');
             robot.moveMouse(x, y);
-            resolve(true);
+            resolve('draw_rectangle success!');
         }
 
         if (action === 'draw_square') {
@@ -89,7 +89,7 @@ export const drawing = (command: string) => {
             robot.mouseToggle('up');
             robot.moveMouse(x, y);
 
-            resolve(true);
+            resolve('draw_square success!');
         }
     });
 };
