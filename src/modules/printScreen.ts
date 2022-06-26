@@ -1,5 +1,4 @@
 import robot from 'robotjs';
-import { WebSocket } from "ws";
 import Jimp from 'jimp';
 
 const screenCapture = (x = 0, y = 0, w: number, h: number): Promise<Jimp> => {
@@ -24,7 +23,7 @@ const screenCapture = (x = 0, y = 0, w: number, h: number): Promise<Jimp> => {
     })
 }
 
-export const printScreen = (sockets: WebSocket[]): Promise<string>  => {
+export const printScreen = (write: (s: string) => void): Promise<string>  => {
     const mousePos = robot.getMousePos();
     var size = 200;
 
@@ -37,7 +36,7 @@ export const printScreen = (sockets: WebSocket[]): Promise<string>  => {
             const base64 = await image.getBase64Async(Jimp.MIME_PNG);
             const header = /^data:image\/png;base64,/;
 
-            sockets.forEach(s => s.send(`prnt_scrn ${base64.replace(header, '')}\0`));
+            write(`prnt_scrn ${base64.replace(header, '')}\0`);
 
             resolve('prnt_scrn success!');
 

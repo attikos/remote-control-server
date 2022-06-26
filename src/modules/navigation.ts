@@ -1,7 +1,6 @@
-import WebSocket from 'ws';
 import robot from 'robotjs';
 
-export const navigation = async (command: string, sockets: WebSocket.WebSocket[]) => {
+export const navigation = async (command: string, write: (s: string) => void): Promise<string|void> => {
     const {x, y} = robot.getMousePos();
     const [action, value]: string[] = command.split(' ');
 
@@ -9,7 +8,8 @@ export const navigation = async (command: string, sockets: WebSocket.WebSocket[]
     let newY: number = y;
 
     if (action === 'mouse_position') {
-        return sockets.forEach(s => s.send(`mouse_position ${x},${y}`));
+        write(`mouse_position ${x},${y}\0`);
+        return `${action} success!`;
     }
 
     if (action === 'mouse_up') {

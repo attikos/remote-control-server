@@ -62,6 +62,7 @@ export const drawing = (command: string) => {
 
             robot.mouseToggle('up');
             robot.moveMouse(x, y);
+
             resolve('draw_rectangle success!');
         }
 
