@@ -15,7 +15,7 @@ const focusWindow = async (x: number, y: number): Promise<void> => {
     await delay(100);
 }
 
-export const drawing = (command: string) => {
+export const drawing = (command: string): Promise<string> => {
     return new Promise(async (resolve) => {
         const {x, y} = robot.getMousePos();
         const [action, radius, length]: string[] = command.split(' ');
@@ -92,5 +92,7 @@ export const drawing = (command: string) => {
 
             resolve('draw_square success!');
         }
+
+        resolve('Unknown command');
     });
 };

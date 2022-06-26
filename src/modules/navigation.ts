@@ -1,6 +1,6 @@
 import robot from 'robotjs';
 
-export const navigation = async (command: string, write: (s: string) => void): Promise<string|void> => {
+export const navigation = async (command: string, write: (s: string) => void): Promise<string> => {
     const {x, y} = robot.getMousePos();
     const [action, value]: string[] = command.split(' ');
 

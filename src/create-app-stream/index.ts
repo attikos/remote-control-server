@@ -14,7 +14,7 @@ export const createAppStream = (duplex: internalStream.Duplex) => {
 
         console.log(command);
 
-        let msg : string;;
+        let msg : string = '';
 
         try {
             if (command.match(/^mouse_/)) {
